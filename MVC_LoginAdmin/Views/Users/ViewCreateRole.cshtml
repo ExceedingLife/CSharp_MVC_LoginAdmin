@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Add Role?";
+
+    if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Success: </strong> @TempData["Success"]
+        </div>
+    }
+    if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Error: </strong> @TempData["Error"]
+        </div>
+    }
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr class="bg-primary">
+            <td class="text-center">
+                <h2>Create User Roles</h2>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <table id="tbrole" style="width:60%; border:dotted 1px;
+                 background-color:gainsboro; padding-left:10px;">
+                    @foreach (var item in Model)
+                    {
+                        <tr class="mx-auto">
+                            <td style=" border:dotted 1px;">
+                                @item.Name
+                            </td>
+                            <td style=" border:dotted 1px;">
+                                <span onclick="return confirm('Confirm Delete Role?')">
+                                    @*<a asp-controller="Users" asp-action="DeleteRole"*@
+                                    @*@Html.ActionLink("Delete", "DeleteRole", "Users", new { @item.Name })*@
+                                    <a href="/Users/DeleteRole?roleName=@item.Name" style="color:red;">Delete</a>
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </td>
+
+        </tr>
+        <tr>
+            <td class="bg-info">
+                <h3>
+                    @Html.ActionLink("Click to Create New Role", "CreateTheRole", "Users");
+                </h3>
+            </td>
+        </tr>
+    </tbody>
+</table>
